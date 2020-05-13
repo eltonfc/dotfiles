@@ -1,10 +1,20 @@
 # dotfiles
-Here's my setup for `vim` and some scripts for working in the command line.
+Here's my setup for `screen`, `vim`, `zathura` and some scripts for
+working with notes and bibliography in the command line.
 
 # Usage
-This repo is intended to be used with [GNU Stow](https://www.gnu.org/software/stow/) version 2.3 and up. If you're using an earlier version of stow, remember to edit `.stowrc` to your actual `${HOME}`, as earlier versions don't expand variables in the rc file.
+This repo is intended to be used with [GNU
+Stow](https://www.gnu.org/software/stow/) version 2.3 and up. If you're using
+an earlier version of stow, remember to edit `.stowrc` to your actual
+`${HOME}`, as earlier versions don't expand variables in the rc file.
 
 ## vim
+`vim` plugins are installed as [git
+submodules](http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-pathogen/).
+In order to clone them you must run `git submodule update --init` after cloning
+this repo. The submodules can then be updated all at one by running `git
+submodule foreach git pull origin master` in this repo's root directory.
+
 Color theme is [One Dark](https://github.com/joshdick/onedark.vim).
 
 ### References:
@@ -17,4 +27,7 @@ Color theme is [One Dark](https://github.com/joshdick/onedark.vim).
  Smith](lukesmoth.xyz) and [Conner McDaniel](https://github.com/connermcd/bin).
 
  ## Zathura
-- Support for synctex based on [Gautam Iyer](http://www.math.cmu.edu/~gautam/sj/blog/20140310-zathura-fsearch.html)'s tip and [a Stack Exchange answer](https://tex.stackexchange.com/a/412366/4844).
+- Support for synctex based on [Gautam
+  Iyer](http://www.math.cmu.edu/~gautam/sj/blog/20140310-zathura-fsearch.html)'s
+  tip and [a Stack Exchange
+  answer](https://tex.stackexchange.com/a/412366/4844).
