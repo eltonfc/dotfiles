@@ -1,7 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhistcnt =5
-let g:netrw_dirhist_5='/home/eltonfc/.local/share/dotfiles/vim/.vim/pack/eltonfc/opt/onedark.vim/.github'
-let g:netrw_dirhist_4='/home/eltonfc/.local/share/dotfiles/vim/.vim/pack/eltonfc/opt/onedark.vim/.github/workflows'
-let g:netrw_dirhist_3='/home/eltonfc/.local/share/dotfiles/vim/.vim/pack/eltonfc/opt/onedark.vim/.github'
-let g:netrw_dirhist_2='/home/eltonfc/.vim/spell'
-let g:netrw_dirhist_1='/home/eltonfc/.vim'
