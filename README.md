@@ -1,13 +1,10 @@
 # dotfiles
-
-Here's my setup for `vim`.
+Here's my setup for `vim` and some scripts for working in the command line.
 
 # Usage
-
 This repo is intended to be used with [GNU Stow](https://www.gnu.org/software/stow/). Remember to edit `.stowrc` to your `${HOME}`.
 
 ## vim
-
 Color theme is [One Dark](https://github.com/joshdick/onedark.vim).
 
 ### References:
@@ -16,6 +13,5 @@ Color theme is [One Dark](https://github.com/joshdick/onedark.vim).
  - [Conner McDaniel](https://github.com/connermcd/dotfiles)
 
  ## Scripts
-
  Bibliography management and notetaking scripts, especially from [Luke
  Smith](lukesmoth.xyz) and [Conner McDaniel](https://github.com/connermcd/bin).
