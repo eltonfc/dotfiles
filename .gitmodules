@@ -1,0 +1,3 @@
+[submodule "vim/.vim/pack/eltonfc/opt/onedark.vim"]
+	path = vim/.vim/pack/eltonfc/opt/onedark.vim
+	url = https://github.com/joshdick/onedark.vim.git
