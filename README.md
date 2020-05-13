@@ -17,4 +17,4 @@ Color theme is [One Dark](https://github.com/joshdick/onedark.vim).
  Smith](lukesmoth.xyz) and [Conner McDaniel](https://github.com/connermcd/bin).
 
  ## Zathura
-	- Support for synctex based on [Gautam Iyer](http://www.math.cmu.edu/~gautam/sj/blog/20140310-zathura-fsearch.html)'s tip.
+	- Support for synctex based on [Gautam Iyer](http://www.math.cmu.edu/~gautam/sj/blog/20140310-zathura-fsearch.html)'s tip and [a Stack Exchange answer](https://tex.stackexchange.com/a/412366/4844).
