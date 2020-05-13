@@ -2,6 +2,10 @@
 
 Here's my setup for `vim`.
 
+# Usage
+
+This repo is intended to be used with [GNU Stow](https://www.gnu.org/software/stow/). Remember to edit `.stowrc` to your `${HOME}`.
+
 ## vim
 
 Color theme is [One Dark](https://github.com/joshdick/onedark.vim).
