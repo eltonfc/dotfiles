@@ -2,7 +2,7 @@
 Here's my setup for `vim` and some scripts for working in the command line.
 
 # Usage
-This repo is intended to be used with [GNU Stow](https://www.gnu.org/software/stow/). Remember to edit `.stowrc` to your `${HOME}`.
+This repo is intended to be used with [GNU Stow](https://www.gnu.org/software/stow/) version 2.3 and up. If you're using an earlier version of stow, remember to edit `.stowrc` to your actual `${HOME}`, as earlier versions don't expand variables in the rc file.
 
 ## vim
 Color theme is [One Dark](https://github.com/joshdick/onedark.vim).
