@@ -27,5 +27,5 @@ tags
 
 .github
 
-onedark.vim/build
+vim/.vim/pack/eltonfc/opt/onedark.vim/build/
 

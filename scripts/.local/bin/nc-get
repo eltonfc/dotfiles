@@ -1,0 +1,9 @@
+#!/bin/bash
+
+if [ -z $1 ]; then
+	echo "Usage: nc-get destination-file"
+	exit 1
+fi
+
+nc -l -p 6000 | pv > ${1}
+

@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ -z $2 ]; then
+	echo "Usage: nc-put file host"
+	exit 1
+fi
+
+pv $1 | nc -w 3 -q 1 $2 6000

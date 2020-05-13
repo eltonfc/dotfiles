@@ -1,0 +1,30 @@
+#!/bin/bash
+
+# Copies (hardlinks) pdf file if it has a DOI.
+
+[ -z "$1" ] && echo "Must give a PDF file to work with." && exit 1
+
+[ ! -f "$1" ] && echo "File $1 not found" && exit 2
+
+ORIGFILE="$1"
+ORIGINODE=$(stat --printf %i "${ORIGFILE}")
+DESTDIR=${HOME}/trab/refs
+
+if [ -z "$2" ]
+then
+	BIB=$(getbib "${ORIGFILE}") || exit 3
+else
+	BIB=$(getbib "${2}") || exit 3
+fi
+
+
+REFNAME=$(sed -n '1s/.*{\([^,]*\),/\1/p' <<< $BIB)
+[ -z "${REFNAME}" ] && exit 4
+
+while [ -f "${DESTDIR}/${REFNAME}.pdf" ]
+do
+	[ "$ORIGINODE" -eq "$(stat --printf %i "${DESTDIR}/${REFNAME}.pdf")" ] && echo "${REFNAME} already exists." && exit 0
+	REFNAME=${REFNAME}%
+done
+
+ln -v "${ORIGFILE}" "${DESTDIR}/${REFNAME}.pdf"
