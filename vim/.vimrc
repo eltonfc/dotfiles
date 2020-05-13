@@ -45,14 +45,17 @@ set splitbelow splitright
 set wildmenu
 set wildmode=longest:full
 
-" (Re)mappings
+""" (Re)mappings
 " Split navigation
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
+map <Leader>o :setlocal spell!<CR>
 
-" LaTeX related stuff
+"""END
+
+""" LaTeX related stuff
 " OPTIONAL: This enables automatic indentation as you type.
 filetype indent on
 
@@ -79,6 +82,17 @@ function! SyncTexForward()
 endfunction
 au FileType tex nmap <Leader>f :call SyncTexForward()<CR>
 
+""Latex Macros
+au FileType tex inoremap <Space><Space> <ESC>/<++><Enter>"_c4l
+au FileType tex nnoremap <Space><Space> <ESC>/<++><Enter>"_c4l
+au FileType tex nnoremap ;a <Esc>o\begin{array*}<Enter><Enter>\end{array*}<Esc>ki
+au FileType tex inoremap ;a <Esc>o\begin{array*}<Enter><Enter>\end{array*}<Esc>ki
+""END
 
+"""END
+
+""" Python
 " Python formatting http://wiki.python.org/moin/Vim
-au FileType python setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4 spl=en
+au FileType python setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
+au FileType python setlocal spell spl=en
+"""END
