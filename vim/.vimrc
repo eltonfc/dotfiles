@@ -1,8 +1,12 @@
+
+" Encoding {{{
 scriptencoding utf-8
 set encoding=utf-8
+filetype plugin on
+" }}}
 
-
-" Colorscheme: https://github.com/joshdick/onedark.vim
+" Colorscheme: {{{
+" https://github.com/joshdick/onedark.vim
 packadd onedark.vim
 " Not all terminals support italics properly. If yours does, opt-in.
 let g:onedark_terminal_italics = 0
@@ -11,23 +15,13 @@ set background=dark
 " Now to recover the transparent background:
 " https://stackoverflow.com/a/37720708/706801
 hi Normal guibg=NONE ctermbg=NONE
+" }}}
 
-filetype plugin on
-
-" Easily open files in the same directory
+" Easily open files in the same directory {{{
 cabbr <expr> %% expand('%:p:h')
+" }}}
 
-"http://vim.wikia.com/wiki/Highlight_unwanted_spaces
-"Highlight unwanted spaces
-"
-highlight ExtraWhitespace ctermbg=darkgreen guibg=lightgreen
-match ExtraWhitespace /\s\+$/
-autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
-autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-autocmd InsertLeave * match ExtraWhitespace /\s\+$/
-autocmd BufWinLeave * call clearmatches()
-
-" These settings can be easily read in :help
+" General settings {{{
 "
 set colorcolumn=80
 set completeopt=menuone,longest
@@ -44,18 +38,18 @@ set spl=en,pt
 set splitbelow splitright
 set wildmenu
 set wildmode=longest:full
+" }}}
 
-""" (Re)mappings
+" (Re)mappings {{{
 " Split navigation
 map <C-h> <C-w>h
 map <C-j> <C-w>j
 map <C-k> <C-w>k
 map <C-l> <C-w>l
 map <Leader>o :setlocal spell!<CR>
+" }}}
 
-"""END
-
-""" LaTeX related stuff
+" LaTeX related stuff {{{
 " OPTIONAL: This enables automatic indentation as you type.
 filetype indent on
 
@@ -82,22 +76,34 @@ function! SyncTexForward()
 endfunction
 au FileType tex nmap <Leader>f :call SyncTexForward()<CR>
 
-""Latex Macros
+" Latex Macros {{{
 au FileType tex inoremap <Space><Space> <ESC>/<++><Enter>"_cf>
 au FileType tex nnoremap <Space><Space> <ESC>/<++><Enter>"_cf>
 au FileType tex nnoremap ;a <Esc>o\begin{array*}<Enter><Enter>\end{array*}<Esc>ki
 au FileType tex inoremap ;a <Esc>o\begin{array*}<Enter><Enter>\end{array*}<Esc>ki
-""END
+au FileType tex set wildignore+=,*.aux,*.fdb_latexmk,*.fls,*.lof,*.log,*.lot,*.pdf,*.synctex.gz,*.toc
+" }}}
 
-"""END
+"}}}
 
-""" Python
+" Python {{{
 " Python formatting http://wiki.python.org/moin/Vim
 au FileType python setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
 au FileType python setlocal spell spl=en
-"""END
+" }}}
 
+" (Bibliographic) Notes {{{
+" Open the pdf file in the markdown note
+au FileType markdown nnoremap ;p /pdf =<CR>f{yi{:silent !zathura <C-R>" >&/dev/null & disown <CR><CR>
+" }}}
 
-""" (Bibliographic) Notes
-au FileType markdown nnoremap ;p /pdf =<CR>f{yi{:silent !zathura <C-R>" 2>/dev/null & disown <CR><CR>
-"""END
+" Highlight unwanted spaces {{{
+"http://vim.wikia.com/wiki/Highlight_unwanted_spaces
+"
+highlight ExtraWhitespace ctermbg=darkgreen guibg=lightgreen
+match ExtraWhitespace /\s\+$/
+autocmd BufWinEnter * match ExtraWhitespace /\s\+$/
+autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+autocmd InsertLeave * match ExtraWhitespace /\s\+$/
+autocmd BufWinLeave * call clearmatches()
+" }}}
