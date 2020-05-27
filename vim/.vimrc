@@ -9,7 +9,7 @@ filetype plugin on
 " Colors {{{
 " https://github.com/joshdick/onedark.vim
 packadd onedark.vim
-" screen doesn't suppoer italics :(
+" screen doesn't support italics :(
 let g:onedark_terminal_italics = 0
 colorscheme onedark
 set background=dark
@@ -58,6 +58,7 @@ filetype indent on
 set nowrap
 set foldmethod=syntax
 set smartindent
+filetype plugin indent on
 " }}}
 
 " Tags and autocomplete {{{
@@ -104,7 +105,7 @@ au FileType tex set wildignore+=,*.aux,*.fdb_latexmk,*.fls,*.lof,*.log,*.lot,*.p
 " Python formatting http://wiki.python.org/moin/Vim
 au FileType python setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
 au FileType python setlocal spell spl=en
-au FileType python setlocal foldmethod=indent "For now...
+" au FileType python setlocal foldmethod=indent "For now...
 " }}}
 
 " (Bibliographic) Notes {{{
