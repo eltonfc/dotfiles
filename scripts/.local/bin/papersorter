@@ -8,7 +8,7 @@
 
 ORIGFILE="$1"
 ORIGINODE=$(stat --printf %i "${ORIGFILE}")
-DESTDIR=${HOME}/trab/refs
+DESTDIR=${HOME}/trab/refs/papers
 
 if [ -z "$2" ]
 then
