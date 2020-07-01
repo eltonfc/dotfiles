@@ -110,7 +110,7 @@ au FileType python setlocal spell spl=en
 
 " (Bibliographic) Notes {{{
 " Open the pdf file in the markdown note
-au FileType markdown nnoremap ;p /pdf =<CR>f{yi{:silent !zathura <C-R>" >&/dev/null & disown <CR><CR> ''
+au FileType markdown nnoremap ;p /pdf =<CR>f{yi{:silent !zathura <C-R>" >&/dev/null & disown <CR><CR> z+ '' zz
 " }}}
 
 " Highlight unwanted spaces {{{
