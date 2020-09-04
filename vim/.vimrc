@@ -89,14 +89,24 @@ function! SyncTexForward()
     let execstr = "silent !zathura --synctex-forward ".line(".").":".col(".").":%:p %:p:r.pdf &"
     exec execstr
 endfunction
-au FileType tex nmap <Leader>f :call SyncTexForward()<CR>
+au FileType tex nmap <Leader>F :call SyncTexForward()<CR>
 
 " Latex Macros {{{
-au FileType tex inoremap <Space><Space> <ESC>/<++><Enter>"_cf>
-au FileType tex nnoremap <Space><Space> <ESC>/<++><Enter>"_cf>
-au FileType tex nnoremap ;a <Esc>o\begin{array*}<Enter><Enter>\end{array*}<Esc>ki
-au FileType tex inoremap ;a <Esc>o\begin{array*}<Enter><Enter>\end{array*}<Esc>ki
-au FileType tex set wildignore+=,*.aux,*.fdb_latexmk,*.fls,*.lof,*.log,*.lot,*.pdf,*.synctex.gz,*.toc
+"au FileType tex inoremap <Space><Space> <ESC>/<++><Enter>"_cf>
+"au FileType tex nnoremap <Space><Space> <ESC>/<++><Enter>"_cf>
+au FileType tex nnoremap <Leader>a <Esc>o\begin{array*}<Enter><Enter>\end{array*}<Esc>ki
+"au FileType tex inoremap <Leader>a <Esc>o\begin{array*}<Enter><Enter>\end{array*}<Esc>ki
+au FileType tex nnoremap <Leader>f <Esc>o\begin{frame}{}<Enter><Enter>\end{frame}<Esc>ki
+"au FileType tex inoremap <Leader>f <Esc>o\begin{frame}{}<Enter><Enter>\end{frame}<Esc>ki
+au FileType tex nnoremap <Leader>b <Esc>o\begin{block}{}<Enter><Enter>\end{block}<Esc>ki
+"au FileType tex inoremap <Leader>b <Esc>o\begin{block}{}<Enter><Enter>\end{block}<Esc>ki
+au FileType tex nnoremap <Leader>i <Esc>o\begin{itemize}<Enter>\item <Enter>\end{itemize}<Esc>kA
+"au FileType tex inoremap <Leader>i <Esc>o\begin{itemize}<Enter>\item <Enter>\end{itemize}<Esc>kA
+au FileType tex nnoremap <Leader>e <Esc>o\begin{enumerate}<Enter>\item <Enter>\end{enumerate}<Esc>kA
+"au FileType tex inoremap <Leader>e <Esc>o\begin{enumerate}<Enter>\item <Enter>\end{enumerate}<Esc>kA
+au FileType tex nnoremap <Leader>m <Esc>o\begin{bmatrix}<Enter><Enter>\end{bmatrix}<Esc>kA
+"au FileType tex inoremap <Leader>m <Esc>o\begin{bmatrix}<Enter><Enter>\end{bmatrix}<Esc>kA
+au FileType tex set wildignore+=*.aux,*.fdb_latexmk,*.fls,*.lof,*.log,*.lot,*.pdf,*.synctex.gz,*.toc
 " }}}
 
 "}}}
