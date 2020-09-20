@@ -50,7 +50,7 @@ map <C-l> <C-w>l
 
 " Spell {{{
 set spl=en,pt
-map <Leader>o :setlocal spell!<CR>
+map <Leader>o :setlocal spell!<CR>:setlocal spell?<CR>
 "}}}
 
 " Indentation and folding {{{
@@ -82,34 +82,52 @@ au FileType tex setlocal foldmarker=\\begin,\\end
 au FileType tex setlocal foldmethod=marker
 
 " Shorter tabs
-au FileType tex setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
+au FileType tex setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
 au FileType tex setlocal spell spelllang=en,pt
 
 function! SyncTexForward()
     let execstr = "silent !zathura --synctex-forward ".line(".").":".col(".").":%:p %:p:r.pdf &"
     exec execstr
 endfunction
-au FileType tex nmap <Leader>F :call SyncTexForward()<CR>
+au FileType tex nmap <Leader>SF :call SyncTexForward()<CR>
 
 " Latex Macros {{{
 "au FileType tex inoremap <Space><Space> <ESC>/<++><Enter>"_cf>
 "au FileType tex nnoremap <Space><Space> <ESC>/<++><Enter>"_cf>
-au FileType tex nnoremap <Leader>a <Esc>o\begin{array*}<Enter><Enter>\end{array*}<Esc>ki
-"au FileType tex inoremap <Leader>a <Esc>o\begin{array*}<Enter><Enter>\end{array*}<Esc>ki
+au FileType tex nnoremap <Leader>a <Esc>o\begin{align*}<Enter><Enter>\end{align*}<Esc>ki
+au FileType tex nnoremap <Leader>A <Esc>i\begin{align*}<Enter><Enter>\end{align*}<Esc>ki
+"au FileType tex inoremap <Leader>a <Esc>o\begin{align*}<Enter><Enter>\end{align*}<Esc>ki
 au FileType tex nnoremap <Leader>f <Esc>o\begin{frame}{}<Enter><Enter>\end{frame}<Esc>ki
+au FileType tex nnoremap <Leader>F <Esc>i\begin{frame}{}<Enter><Enter>\end{frame}<Esc>ki
 "au FileType tex inoremap <Leader>f <Esc>o\begin{frame}{}<Enter><Enter>\end{frame}<Esc>ki
 au FileType tex nnoremap <Leader>b <Esc>o\begin{block}{}<Enter><Enter>\end{block}<Esc>ki
+au FileType tex nnoremap <Leader>B <Esc>i\begin{block}{}<Enter><Enter>\end{block}<Esc>ki
 "au FileType tex inoremap <Leader>b <Esc>o\begin{block}{}<Enter><Enter>\end{block}<Esc>ki
 au FileType tex nnoremap <Leader>i <Esc>o\begin{itemize}<Enter>\item <Enter>\end{itemize}<Esc>kA
+au FileType tex nnoremap <Leader>I <Esc>i\begin{itemize}<Enter>\item <Enter>\end{itemize}<Esc>kA
 "au FileType tex inoremap <Leader>i <Esc>o\begin{itemize}<Enter>\item <Enter>\end{itemize}<Esc>kA
 au FileType tex nnoremap <Leader>e <Esc>o\begin{enumerate}<Enter>\item <Enter>\end{enumerate}<Esc>kA
+au FileType tex nnoremap <Leader>E <Esc>i\begin{enumerate}<Enter>\item <Enter>\end{enumerate}<Esc>kA
 "au FileType tex inoremap <Leader>e <Esc>o\begin{enumerate}<Enter>\item <Enter>\end{enumerate}<Esc>kA
 au FileType tex nnoremap <Leader>m <Esc>o\begin{bmatrix}<Enter><Enter>\end{bmatrix}<Esc>kA
+au FileType tex nnoremap <Leader>M <Esc>i\begin{bmatrix}<Enter><Enter>\end{bmatrix}<Esc>kA
 "au FileType tex inoremap <Leader>m <Esc>o\begin{bmatrix}<Enter><Enter>\end{bmatrix}<Esc>kA
 au FileType tex set wildignore+=*.aux,*.fdb_latexmk,*.fls,*.lof,*.log,*.lot,*.pdf,*.synctex.gz,*.toc
 " }}}
 
 "}}}
+
+" Restructured text {{{
+" Shorter tabs
+au FileType rst setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
+au FileType rst setlocal spell spelllang=en,pt
+
+"Macros
+au FileType rst nnoremap <Leader>h yyP:s/./=/g<CR>yyjp:nohl<CR>
+au FileType rst nnoremap <Leader>s yyp:s/./=/g<CR>:nohl<CR>
+au FileType rst nnoremap <Leader>ss yyp:s/./-/g<CR>:nohl<CR>
+
+" }}}
 
 " Python {{{
 " Python formatting http://wiki.python.org/moin/Vim
