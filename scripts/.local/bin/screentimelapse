@@ -1,9 +1,13 @@
 #!/bin/bash
 
-[ -z "$1" ] && exit 1
-[ -f "$1" ] && exit 2
+pkill --signal SIGINT -f x11grab && exit
+
+TARGET="$1"
+
+[ -z "$1" ] && TARGET=$(date +/tmp/screengrab_%Y-%m-%dT%H:%M:%S.mkv)
+[ -f "$TARGET" ] && exit 1
 
 ffmpeg  -framerate 1 -f x11grab -s 1600,900 -i :0.0+0,0 \
 	-vf settb=\(1/30\),setpts=N/TB/30 -r 30 -y \
 	-vcodec libx264 -crf 23 -preset ultrafast -threads 0 \
-	$1
+	$TARGET
