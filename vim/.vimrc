@@ -75,7 +75,7 @@ let g:tex_flavor='latex'
 
 " Formatting paragraphs in LaTeX: an "environment-aware gqap"
 " https://vim.fandom.com/wiki/Formatting_paragraphs_in_LaTeX:_an_%22environment-aware_gqap%22
-au FileType tex omap lp ?^$\\|^\s*\(\\begin\\|\\end\\|\\label\)?1<CR>//-1<CR>.<CR>
+au FileType tex omap lp ?^$\\|^\s*\(\\begin\\|\\end\\|\\label\)?1<CR>//-1<CR>.<CR>:nohl<CR>
 
 " Fold at environment limits:
 au FileType tex setlocal foldmarker=\\begin,\\end
@@ -85,34 +85,39 @@ au FileType tex setlocal foldmethod=marker
 au FileType tex setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
 au FileType tex setlocal spell spelllang=en,pt
 
+" Auto wrap
+au FileType tex setlocal textwidth=80
+
 function! SyncTexForward()
     let execstr = "silent !zathura --synctex-forward ".line(".").":".col(".").":%:p %:p:r.pdf &"
     exec execstr
 endfunction
 au FileType tex nmap <Leader>SF :call SyncTexForward()<CR>
+au FileType tex set wildignore+=*.aux,*.fdb_latexmk,*.fls,*.lof,*.log,*.lot,*.pdf,*.synctex.gz,*.toc
 
 " Latex Macros {{{
 "au FileType tex inoremap <Space><Space> <ESC>/<++><Enter>"_cf>
 "au FileType tex nnoremap <Space><Space> <ESC>/<++><Enter>"_cf>
-au FileType tex nnoremap <Leader>a <Esc>o\begin{align*}<Enter><Enter>\end{align*}<Esc>ki
-au FileType tex nnoremap <Leader>A <Esc>i\begin{align*}<Enter><Enter>\end{align*}<Esc>ki
+au FileType tex nnoremap <Leader>a <Esc>o\begin{align*}<Enter><Enter>\end{align*}<Esc>k
+au FileType tex nnoremap <Leader>A <Esc>i\begin{align*}<Enter><Enter>\end{align*}<Esc>k
 "au FileType tex inoremap <Leader>a <Esc>o\begin{align*}<Enter><Enter>\end{align*}<Esc>ki
-au FileType tex nnoremap <Leader>f <Esc>o\begin{frame}{}<Enter><Enter>\end{frame}<Esc>ki
-au FileType tex nnoremap <Leader>F <Esc>i\begin{frame}{}<Enter><Enter>\end{frame}<Esc>ki
+au FileType tex nnoremap <Leader>f <Esc>o\begin{frame}{}<Enter><Enter>\end{frame}<Esc>k
+au FileType tex nnoremap <Leader>F <Esc>i\begin{frame}{}<Enter><Enter>\end{frame}<Esc>k
 "au FileType tex inoremap <Leader>f <Esc>o\begin{frame}{}<Enter><Enter>\end{frame}<Esc>ki
-au FileType tex nnoremap <Leader>b <Esc>o\begin{block}{}<Enter><Enter>\end{block}<Esc>ki
-au FileType tex nnoremap <Leader>B <Esc>i\begin{block}{}<Enter><Enter>\end{block}<Esc>ki
+au FileType tex nnoremap <Leader>b <Esc>o\begin{block}{}<Enter><Enter>\end{block}<Esc>k
+au FileType tex nnoremap <Leader>B <Esc>i\begin{block}{}<Enter><Enter>\end{block}<Esc>k
 "au FileType tex inoremap <Leader>b <Esc>o\begin{block}{}<Enter><Enter>\end{block}<Esc>ki
-au FileType tex nnoremap <Leader>i <Esc>o\begin{itemize}<Enter>\item <Enter>\end{itemize}<Esc>kA
-au FileType tex nnoremap <Leader>I <Esc>i\begin{itemize}<Enter>\item <Enter>\end{itemize}<Esc>kA
+au FileType tex nnoremap <Leader>i <Esc>o\begin{itemize}<Enter>\item <Enter>\end{itemize}<Esc>k
+au FileType tex nnoremap <Leader>I <Esc>i\begin{itemize}<Enter>\item <Enter>\end{itemize}<Esc>k
 "au FileType tex inoremap <Leader>i <Esc>o\begin{itemize}<Enter>\item <Enter>\end{itemize}<Esc>kA
-au FileType tex nnoremap <Leader>e <Esc>o\begin{enumerate}<Enter>\item <Enter>\end{enumerate}<Esc>kA
-au FileType tex nnoremap <Leader>E <Esc>i\begin{enumerate}<Enter>\item <Enter>\end{enumerate}<Esc>kA
+au FileType tex nnoremap <Leader>e <Esc>o\begin{enumerate}<Enter>\item <Enter>\end{enumerate}<Esc>k
+au FileType tex nnoremap <Leader>E <Esc>i\begin{enumerate}<Enter>\item <Enter>\end{enumerate}<Esc>k
 "au FileType tex inoremap <Leader>e <Esc>o\begin{enumerate}<Enter>\item <Enter>\end{enumerate}<Esc>kA
-au FileType tex nnoremap <Leader>m <Esc>o\begin{bmatrix}<Enter><Enter>\end{bmatrix}<Esc>kA
-au FileType tex nnoremap <Leader>M <Esc>i\begin{bmatrix}<Enter><Enter>\end{bmatrix}<Esc>kA
+au FileType tex nnoremap <Leader>m <Esc>o\begin{bmatrix}<Enter><Enter>\end{bmatrix}<Esc>k
+au FileType tex nnoremap <Leader>M <Esc>i\begin{bmatrix}<Enter><Enter>\end{bmatrix}<Esc>k
 "au FileType tex inoremap <Leader>m <Esc>o\begin{bmatrix}<Enter><Enter>\end{bmatrix}<Esc>kA
-au FileType tex set wildignore+=*.aux,*.fdb_latexmk,*.fls,*.lof,*.log,*.lot,*.pdf,*.synctex.gz,*.toc
+au FileType tex nnoremap <Leader>c <Esc>o\begin{columns}[t]<Enter>\column{0.45\textwidth}\vspace{-\baselineskip}%<Enter><Enter>\end{columns}<Esc>k
+au FileType tex nnoremap <Leader>C <Esc>i\begin{columns}[t]<Enter>\column{0.45\textwidth}\vspace{-\baselineskip}%<Enter><Enter>\end{columns}<Esc>k
 " }}}
 
 "}}}
@@ -120,7 +125,9 @@ au FileType tex set wildignore+=*.aux,*.fdb_latexmk,*.fls,*.lof,*.log,*.lot,*.pd
 " Restructured text {{{
 " Shorter tabs
 au FileType rst setlocal tabstop=2 expandtab shiftwidth=2 softtabstop=2
+au FileType rst setlocal spell
 au FileType rst setlocal spell spelllang=en,pt
+au FileType rst setlocal textwidth=80
 
 "Macros
 au FileType rst nnoremap <Leader>h yyP:s/./=/g<CR>yyjp:nohl<CR>
