@@ -12,7 +12,12 @@ NOTESDIR=${HOME}/trab/refs/notes
 [ ! -f "$1" ] && echo "Argument ${1} is not a file." && exit 1
 
 pdf="$1"
-bib="$(getbib ${1})" || exit 1
+if [ -z "$2" ]
+then
+	bib=$(getbib "${pdf}") || exit 1
+else
+	bib=$(getbib "${2}") || exit 1
+fi
 index=$(sed -n '1s/.*{\([^,]*\),/\1/p' <<< $bib)
 doi=$(grep -o -E "doi = {[^}]*" <<< $bib | cut -d{ -f2)
 file_name=
