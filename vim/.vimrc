@@ -164,3 +164,5 @@ autocmd BufWinLeave * call clearmatches()
  nnoremap <leader>sv :source $MYVIMRC <bar> :doautocmd BufRead<CR>
 " }}}
 
+
+let g:onedark_terminal_italics = 1
