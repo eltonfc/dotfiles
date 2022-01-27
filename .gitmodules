@@ -4,3 +4,6 @@
 [submodule "vim/.vim/pack/eltonfc/start/vim-coiled-snake"]
 	path = vim/.vim/pack/eltonfc/start/vim-coiled-snake
 	url = https://github.com/kalekundert/vim-coiled-snake.git
+[submodule "vim/.vim/pack/eltonfc/start/ale"]
+	path = vim/.vim/pack/eltonfc/start/ale
+	url = https://github.com/dense-analysis/ale.git
