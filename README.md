@@ -12,8 +12,8 @@ an earlier version of stow, remember to edit `.stowrc` to your actual
 `vim` plugins are installed as [git
 submodules](http://vimcasts.org/episodes/synchronizing-plugins-with-git-submodules-and-pathogen/).
 In order to clone them you must run `git submodule update --init` after cloning
-this repo. The submodules can then be updated all at one by running `git
-submodule foreach git pull origin master` in this repo's root directory.
+this repo. The submodules can then be updated all at once by running `git
+submodule foreach git pull` in this repo's root directory.
 
 Color theme is [One Dark](https://github.com/joshdick/onedark.vim).
 
