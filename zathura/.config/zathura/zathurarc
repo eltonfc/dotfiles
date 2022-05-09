@@ -2,3 +2,8 @@ set dbus-service true
 set synctex true
 set synctex-editor-command "vim --servername tex --remote-silent +%{line} %{input}"
 set window-title-basename true
+# set dual page layout
+# https://unix.stackexchange.com/questions/234744/can-zathuras-dual-page-mode-use-a-page-offset
+#
+set first-page-column 1
+
