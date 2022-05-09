@@ -1,9 +1,12 @@
 [submodule "vim/.vim/pack/eltonfc/opt/onedark.vim"]
 	path = vim/.vim/pack/eltonfc/opt/onedark.vim
 	url = https://github.com/joshdick/onedark.vim.git
+	branch = main
 [submodule "vim/.vim/pack/eltonfc/start/vim-coiled-snake"]
 	path = vim/.vim/pack/eltonfc/start/vim-coiled-snake
 	url = https://github.com/kalekundert/vim-coiled-snake.git
+	branch = master
 [submodule "vim/.vim/pack/eltonfc/start/ale"]
 	path = vim/.vim/pack/eltonfc/start/ale
 	url = https://github.com/dense-analysis/ale.git
+	branch = master
