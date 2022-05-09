@@ -138,9 +138,24 @@ au FileType rst nnoremap <Leader>ss yyp:s/./-/g<CR>:nohl<CR>
 
 " Python {{{
 " Python formatting http://wiki.python.org/moin/Vim
-au FileType python setlocal tabstop=8 expandtab shiftwidth=4 softtabstop=4
+au FileType python setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
 au FileType python setlocal spell spl=en
-" au FileType python setlocal foldmethod=indent "For now...
+au FileType python setlocal foldmethod=indent "For now...
+" }}}
+
+" ALE linting {{{
+let g:ale_linters = {
+	\'python': ['pylint', 'pyright', 'flake8', 'pydocstyle'],
+	\'tex': ['lacheck', 'chktex'],
+	\}
+let g:ale_fixers = {
+	\'*': ['remove_trailing_lines', 'trim_whitespace'],
+	\'python': ['blue', 'isort'],
+	\}
+let g:ale_fix_on_save = 0
+let g:ale_completion_enaled = 1
+nmap <F10> :ALEFix<CR>
+
 " }}}
 
 " (Bibliographic) Notes {{{
@@ -162,6 +177,38 @@ autocmd BufWinLeave * call clearmatches()
 " vimrc management {{{
  nnoremap <leader>ev :vsp $MYVIMRC<CR>
  nnoremap <leader>sv :source $MYVIMRC <bar> :doautocmd BufRead<CR>
+" }}}
+
+" statusline {{{
+" https://www.reddit.com/r/vim/comments/bzbv98/detect_whether_caps_locks_is_on/eqs2lzt/
+
+" function! Cap_Status()
+    " let St = systemlist('xset -q | grep "Caps Lock" | awk ''{print $4}''')[0]
+    " return St
+" endfunction
+
+" autocmd InsertLeave * call Capsoff()
+" set laststatus=2
+" set statusline=
+" set statusline+=\ %f
+" set statusline+=%(\ %m%r%)
+" set statusline+=%=
+" set statusline+=%q
+" set statusline+=\ %y
+" set statusline+=\ %n:%l,%c
+" set statusline+=\ %p%%
+" set statusline+=\ %{\"CL\ \"\.Cap_Status()}
+
+"}}}
+
+" Load modules and helptags {{{
+" https://github.com/dense-analysis/ale#generating-vim-help-files
+" Load all plugins now.
+" Plugins need to be added to runtimepath before helptags can be generated.
+packloadall
+" Load all of the helptags now, after plugins have been loaded.
+" All messages and errors will be ignored.
+silent! helptags ALL
 " }}}
 
 
