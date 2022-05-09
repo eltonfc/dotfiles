@@ -24,7 +24,7 @@ REFNAME=$(sed -n '1s/.*{\([^,]*\),/\1/p' <<< $BIB)
 while [ -f "${DESTDIR}/${REFNAME}.pdf" ]
 do
 	[ "$ORIGINODE" -eq "$(stat --printf %i "${DESTDIR}/${REFNAME}.pdf")" ] && echo "${REFNAME} already exists." && exit 0
-	REFNAME=${REFNAME}%
+	REFNAME=${REFNAME}+
 done
 
 ln -v "${ORIGFILE}" "${DESTDIR}/${REFNAME}.pdf"
