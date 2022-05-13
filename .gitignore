@@ -29,4 +29,4 @@ tags
 .github
 
 vim/.vim/pack/eltonfc/opt/onedark.vim/build/
-
+vim/.vim/spell/*utf-8.spl
