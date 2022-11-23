@@ -143,6 +143,12 @@ au FileType python setlocal spell spl=en
 au FileType python setlocal foldmethod=indent "For now...
 " }}}
 
+" Arduino {{{
+"
+au FileType arduino setlocal tabstop=4 expandtab shiftwidth=4 softtabstop=4
+au FileType arduino setlocal spell spl=en
+" }}}
+
 " ALE linting {{{
 let g:ale_linters = {
 	\'python': ['pylint', 'pyright', 'flake8', 'pydocstyle'],
