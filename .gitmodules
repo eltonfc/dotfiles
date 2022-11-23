@@ -10,3 +10,6 @@
 	path = vim/.vim/pack/eltonfc/start/ale
 	url = https://github.com/dense-analysis/ale.git
 	branch = master
+[submodule "submodules/catppucchin/xfce4-terminal"]
+	path = submodules/catppucchin/xfce4-terminal
+	url = git@github.com:catppuccin/xfce4-terminal.git
