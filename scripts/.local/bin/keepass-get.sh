@@ -26,7 +26,7 @@ fi
 
 ENTRY=$(dmenu -i -p "Entry?" <&- )
 
-ITEM=$(keepassxc-cli locate "${DATABASE}" "${ENTRY}" <<< "${PASS}" 2>&1)
+ITEM=$(keepassxc-cli search "${DATABASE}" "${ENTRY}" <<< "${PASS}" 2>&1)
 # Cleaning up verbosity from keepassxc
 ITEM=$(tail -n 1 <<< "${ITEM}")
 
@@ -36,7 +36,7 @@ then
 	exit 1
 fi
 
-keepassxc-cli clip ${DATABASE} "${ITEM}" <<< ${PASS} && notify-send "Password for ${ITEM} copied to clipboard."
+keepassxc-cli clip ${DATABASE} "${ITEM}" 0 <<< ${PASS} && notify-send "Password for ${ITEM} copied to clipboard."
 [[ -n $TIMEOUT ]] && (
 	notify-send "Clearing Clipboard in ${TIMEOUT} seconds..."
 	sleep ${TIMEOUT}
