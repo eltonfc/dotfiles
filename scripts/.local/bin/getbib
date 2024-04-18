@@ -10,25 +10,43 @@ fixdoi(){
 sed -e 's/^10/doi:10/' -e 's/^DOI/doi/' -e 's/ //g' -e 's#^doi/#doi:#' <<< "$1"
 }
 
+arxiv2doi(){
+  # read stdin: https://stackoverflow.com/a/58452863/706801
+  read arxiv_string
+  [[ -z "${arxiv_string}" ]] && exit 2
+  arxiv_id=$(sed 's/^.*:\([0-9.v]*\) .*$/\1/' <<< ${arxiv_string})
+  doi=$(curl -s "http://export.arxiv.org/api/query?id_list=${arxiv_id}" | sed -n '/arxiv:doi/s/ *<[^>]*>//gp')
+  if [[ -z "${doi}" ]]
+  then
+    doi=10.48550/${arxiv_id} 
+  fi
+  echo -ne ${doi}
+}
 
 [ -z "$1" ] && echo "Give a PDF file or a DOI as argument." && exit 1
 
 # https://www.crossref.org/blog/dois-and-matching-regular-expressions/
 DOI_REGEX='10.[0-9]{3,9}/[-._;()/:A-Z0-9]+'
+ARXIV_REGEX='^arXiv:[0-9]{4}.[0-9v]* \[[-.a-zA-Z]*\] [0-9]{2} [A-Z][a-z]{2} [0-9]{4}$'
 
 if [ -f "$1" ]; then
-	doi=$(pdfinfo "$1" | grep -io "doi:.*") ||
+  doi=$(pdftotext "$1" - 2>/dev/null | grep -Eio "${ARXIV_REGEX}" -m 1 | arxiv2doi) ||
+	doi=$(pdfinfo "$1" | grep -io 'doi:.*') ||
 	doi=$(pdftotext "$1" - 2>/dev/null | grep -Eio "${DOI_REGEX}" -m 1) ||
 	exit 2
 else
 	doi="$1"
 fi
-
+echo captured=${doi} >&2
 doi=$(fixdoi "${doi}")
 
+echo ${doi} >&2
 #testing if the DOI resolves:
 [ -z "${doi}" ] && exit 2
-curl -s "https://doi.org/api/handles/${doi#doi:}" | grep -q 'responseCode.:1,' || exit 2
+# curl -s "https://doi.org/api/handles/${doi#doi:}" | grep -q 'responseCode.:1,' || exit 3
 
 # Actually getting the bibTeX entry:
-curl -s "http://api.crossref.org/works/${doi}/transform/application/x-bibtex" -w "\\n"
+#curl -s "http://api.crossref.org/works/${doi}/transform/application/x-bibtex" -w '\n'
+bib=$(curl -sLH  "Accept: text/bibliography; style=bibtex" "https://dx.doi.org/${doi}")
+
+grep -q '<title>Error: DOI Not Found</title>' <<< "${bib}" && exit 3 || echo ${bib}
