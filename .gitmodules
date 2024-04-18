@@ -13,3 +13,9 @@
 [submodule "submodules/catppucchin/xfce4-terminal"]
 	path = submodules/catppucchin/xfce4-terminal
 	url = git@github.com:catppuccin/xfce4-terminal.git
+[submodule "submodules/catppucchin/vim"]
+	path = submodules/catppucchin/vim
+	url = git@github.com:catppuccin/vim.git
+[submodule "submodules/catppucchin/zathura"]
+	path = submodules/catppucchin/zathura
+	url = git@github.com:catppuccin/zathura.git
