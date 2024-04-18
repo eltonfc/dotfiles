@@ -14,7 +14,7 @@
 set -e
 
 readonly NOTES_DIRECTORY="${NOTES_DIRECTORY:-"${HOME}/notes"}"
-readonly NOTES_EDITOR="${EDITOR:-/usr/bin/vim}"
+readonly NOTES_EDITOR=/usr/bin/vim
 
 readonly NOTES_FILE="$(date +%Y-%m-%d).md"
 readonly NOTES_PATH="${NOTES_DIRECTORY}/${NOTES_FILE}"
