@@ -14,18 +14,23 @@ NOTESDIR=${HOME}/trab/refs/notes
 pdf="$1"
 if [ -z "$2" ]
 then
-	bib=$(getbib "${pdf}") || exit 1
+	bib=$(getbib "${pdf}" | bibclean) || exit 1
 else
-	bib=$(getbib "${2}") || exit 1
+	bib=$(getbib "${2}" | bibclean) || exit 1
 fi
 index=$(sed -n '1s/.*{\([^,]*\),/\1/p' <<< $bib)
+#index=$(sed -n '1s/.*{\([^,]*\),/\1/p' <<< $BIB)
+# Trocado porque o Crossref começou a devolver bibtex sem quebra de linha:
+# https://crossref.atlassian.net/browse/CR-1064
+#index=$(sed -n '1s/[^{]*{\([^,]*\),/\1/p' <<< $bib)
+#index=$(sed -n '1s/.*@.[^{]*{\([^,]*\).*/\1/p' <<< $bib)
 doi=$(grep -o -E "doi = {[^}]*" <<< $bib | cut -d{ -f2)
 file_name=
 
 make_file() {
 new_pdf=$(realpath $pdf)
 [[ ! -f "$new_pdf" ]] && mv "$pdf" "$new_pdf"
-bib=$(echo "$bib" | sed "1a\\\tpdf = {$new_pdf},")
+bib=$(echo "$bib" | sed "1a\\  pdf = {$new_pdf},")
 cat >"$file_name" <<EOF
 ~~~.bib
 $bib
@@ -55,4 +60,4 @@ check_file() {
 }
 
 check_file "$index"
-vim "$file_name"
+vi "$file_name"

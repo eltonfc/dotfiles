@@ -12,13 +12,16 @@ DESTDIR=${HOME}/trab/refs/papers
 
 if [ -z "$2" ]
 then
-	BIB=$(getbib "${ORIGFILE}") || exit 3
+	BIB=$(getbib "${ORIGFILE}" | bibclean) || exit 3
 else
-	BIB=$(getbib "${2}") || exit 3
+	BIB=$(getbib "${2}" | bibclean) || exit 3
 fi
 
-
 REFNAME=$(sed -n '1s/.*{\([^,]*\),/\1/p' <<< $BIB)
+# Trocado porque o Crossref começou a devolver bibtex sem quebra de linha:
+# https://crossref.atlassian.net/browse/CR-1064
+#REFNAME=$(sed -n '1s/[^{].*{\([^,]*\),/\1/p' <<< $BIB)
+#REFNAME=$(sed -n '1s/.*@.[^{]*{\([^,]*\).*/\1/p' <<< $BIB)
 [ -z "${REFNAME}" ] && exit 4
 
 while [ -f "${DESTDIR}/${REFNAME}.pdf" ]
